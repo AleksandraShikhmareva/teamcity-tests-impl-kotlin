@@ -164,6 +164,7 @@ class BuildConfigurationPage(val driver: WebDriver) {
     fun addNewParameter(name: String, value: String): BuildConfigurationPage {
         SeleniumUtils.waitElementToBeClickable(driver, addNewBtn, 10)
         addNewBtn.click()
+        SeleniumUtils.waitVisibilityOfElement(driver, parameterNameInput, 10)
         parameterNameInput.sendKeys(name)
         parameterValueInput.sendKeys(value)
         submitBtn.click()
@@ -177,7 +178,7 @@ class BuildConfigurationPage(val driver: WebDriver) {
         SeleniumUtils.waitElementToBeClickable(driver, addNewBtn, 10)
         addNewBtn.click()
         SeleniumUtils.customSelect(driver, runner, optionInput, buildTypeSettingsContainer)
-        SeleniumUtils.waitElementToBeClickable(driver, stepNameInput, 5)
+        SeleniumUtils.waitVisibilityOfElement(driver, stepNameInput, 5)
         stepNameInput.sendKeys(stepName)
         goalsInput.sendKeys(goals)
         SeleniumUtils.moveToElement(driver, footer)
@@ -190,6 +191,7 @@ class BuildConfigurationPage(val driver: WebDriver) {
     }
 
     fun openBuildStepsTab(): BuildConfigurationPage {
+        SeleniumUtils.waitElementToBeClickable(driver, buildStepsTab, 10)
         buildStepsTab.click()
         return this
     }

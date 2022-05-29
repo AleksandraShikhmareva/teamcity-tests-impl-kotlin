@@ -46,7 +46,7 @@ class CreateItemPage(val driver: WebDriver) {
     @Step("Create project on \"From a repository URL\" tab with GitHub public repository URL = {projectUrl}")
     fun addProjectFromRemoteRepository(projectUrl: String) {
         createFromUrl.click()
-        SeleniumUtils.waitElementToBeClickable(driver, urlInput, 5)
+        SeleniumUtils.waitVisibilityOfElement(driver, urlInput, 5)
         urlInput.sendKeys(projectUrl)
         proceedBtn.click()
     }
@@ -54,7 +54,7 @@ class CreateItemPage(val driver: WebDriver) {
     @Step("Create project \"{projectName}\" manually")
     fun createProjectManually(projectName: String) {
         createManually.click()
-        SeleniumUtils.waitElementToBeClickable(driver, nameInput, 5)
+        SeleniumUtils.waitVisibilityOfElement(driver, nameInput, 5)
         nameInput.sendKeys(projectName)
         createBtn.click()
         SeleniumUtils.waitVisibilityOfElement(driver, successMessage, 5)

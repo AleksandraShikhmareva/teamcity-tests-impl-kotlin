@@ -43,7 +43,7 @@ class MainPage(private val driver: WebDriver) {
 
     @Step("Open Administration Link")
     fun openAdministrationLink() {
-        SeleniumUtils.waitForElementPresent(driver, By.xpath("//a[@title='Administration']/span"), 5)
+        SeleniumUtils.waitVisibilityOfElement(driver, administrationLink, 5)
         SeleniumUtils.waitElementToBeClickable(driver, administrationLink, 5)
         administrationLink.click()
     }

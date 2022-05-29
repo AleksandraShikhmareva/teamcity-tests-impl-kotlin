@@ -1,5 +1,6 @@
 package com.shikhmareva
 
+import com.shikhmareva.dataProvider.ConfigFileReader
 import com.shikhmareva.pages.*
 import io.qameta.allure.Description
 import org.testng.Assert
@@ -65,8 +66,8 @@ class MainTests : BaseTest() {
         administrationPage.createProject()
         createProjectPage.addProjectFromRemoteRepository(PROJECT_URL_1)
         Assert.assertTrue(createProjectFromURLPage.checkSuccessConnectMessage().contains(SUCCESS_CONNECTION_MESSAGE))
-        createProjectFromURLPage!!.addGeneralProjectProperties(BRANCH_NAME, PROJECT_NAME_1)
-        buildConfigurationPage!!.openParametersTab()
+        createProjectFromURLPage.addGeneralProjectProperties(BRANCH_NAME, PROJECT_NAME_1)
+        buildConfigurationPage.openParametersTab()
             .addNewParameter("MAVEN_EXTRA_PARAMETERS", "-DskipTests=true")
             .addNewParameter("PROJECT_VERSION", "1.0")
             .addNewParameter("BUILD_VERSION", "%PROJECT_VERSION%.%build.number%")

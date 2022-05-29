@@ -16,7 +16,7 @@ object SeleniumUtils {
 
     fun waitVisibilityOfElement(driver: WebDriver?, element: WebElement?, timeOutInSeconds: Long) {
         WebDriverWait(driver, timeOutInSeconds)
-            .until(ExpectedConditions.visibilityOfAllElements(element))
+            .until(ExpectedConditions.visibilityOf(element))
     }
 
     fun waitElementToBeClickable(driver: WebDriver, element: WebElement?, timeOutInSeconds: Long) {

@@ -14,12 +14,12 @@ object SeleniumUtils {
 
     private val logger = LoggerFactory.getLogger(SeleniumUtils::class.java)
 
-    fun waitVisibilityOfElement(driver: WebDriver?, element: WebElement?, timeOutInSeconds: Long) {
+    fun waitVisibilityOfElement(driver: WebDriver, element: WebElement, timeOutInSeconds: Long) {
         WebDriverWait(driver, timeOutInSeconds)
             .until(ExpectedConditions.visibilityOf(element))
     }
 
-    fun waitElementToBeClickable(driver: WebDriver, element: WebElement?, timeOutInSeconds: Long) {
+    fun waitElementToBeClickable(driver: WebDriver, element: WebElement, timeOutInSeconds: Long) {
         val configFileReader = ConfigFileReader()
         try {
             Thread.sleep(1000)

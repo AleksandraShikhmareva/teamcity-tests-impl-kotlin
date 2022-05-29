@@ -1,6 +1,5 @@
 package com.shikhmareva.utils
 
-import com.shikhmareva.dataProvider.ConfigFileReader
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
@@ -29,35 +28,32 @@ object SeleniumUtils {
         }
     }
 
-    fun waitForElementPresent(driver: WebDriver, by: By, timeOutInSeconds: Long): WebElement? {
-        val element: WebElement
+    fun waitForElementPresent(driver: WebDriver, by: By, timeOutInSeconds: Long) {
         try {
             Thread.sleep(500)
-            val wait = WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds))
-            element = wait.until(ExpectedConditions.presenceOfElementLocated(by))
-            return element
+            WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(by))
         } catch (e: Exception) {
             logger.error("Wait element exception", e)
         }
-        return null
-    }
 
-    fun moveToElement(driver: WebDriver, element: WebElement) {
-        val actions = Actions(driver)
-        actions.moveToElement(element)
-        actions.perform()
-    }
-
-    fun customSelect(driver: WebDriver, value: String, select: WebElement, form: WebElement) {
-        select.clear()
-        select.sendKeys(value)
-        val selectedValue = driver.findElement(By.xpath("//li[@data-title='$value']"))
-        waitVisibilityOfElement(driver, selectedValue, 10)
-        try {
-            Thread.sleep(1000)
-        } catch (e: InterruptedException) {
-            logger.error("Wait element exception", e)
+        fun moveToElement(driver: WebDriver, element: WebElement) {
+            val actions = Actions(driver)
+            actions.moveToElement(element)
+            actions.perform()
         }
-        form.click()
+
+        fun customSelect(driver: WebDriver, value: String, select: WebElement, form: WebElement) {
+            select.clear()
+            select.sendKeys(value)
+            val selectedValue = driver.findElement(By.xpath("//li[@data-title='$value']"))
+            waitVisibilityOfElement(driver, selectedValue, 10)
+            try {
+                Thread.sleep(1000)
+            } catch (e: InterruptedException) {
+                logger.error("Wait element exception", e)
+            }
+            form.click()
+        }
     }
 }

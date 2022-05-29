@@ -24,7 +24,7 @@ object SeleniumUtils {
             WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds))
                 .until(ExpectedConditions.elementToBeClickable(element))
         } catch (e: Exception) {
-            logger.error("Wait element exception", e)
+            logger.error("Element not found:", e)
         }
     }
 
@@ -34,7 +34,7 @@ object SeleniumUtils {
             WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds))
                 .until(ExpectedConditions.presenceOfElementLocated(by))
         } catch (e: Exception) {
-            logger.error("Wait element exception", e)
+            logger.error("Element not found:", e)
         }
     }
 
@@ -48,11 +48,11 @@ object SeleniumUtils {
         select.clear()
         select.sendKeys(value)
         val selectedValue = driver.findElement(By.xpath("//li[@data-title='$value']"))
-        waitVisibilityOfElement(driver, selectedValue, 10)
         try {
+            waitVisibilityOfElement(driver, selectedValue, 10)
             Thread.sleep(1000)
         } catch (e: InterruptedException) {
-            logger.error("Wait element exception", e)
+            logger.error("Element not found:", e)
         }
         form.click()
     }

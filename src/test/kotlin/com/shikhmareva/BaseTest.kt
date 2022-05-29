@@ -11,7 +11,7 @@ import org.testng.ITestContext
 import org.testng.annotations.AfterSuite
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.Listeners
-import java.util.concurrent.TimeUnit
+import java.time.Duration
 
 @Listeners(BaseTestListener::class)
 abstract class BaseTest {
@@ -44,9 +44,8 @@ abstract class BaseTest {
             driver.manage().window().fullscreen()
             driver.manage().window().maximize()
         }
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS)
-        driver.manage().timeouts()
-            .implicitlyWait(configFileReader.getProperty("defaultImplicitlyWait").toLong(), TimeUnit.SECONDS)
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5))
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(configFileReader.getProperty("defaultImplicitlyWait").toLong()))
         driver.get(configFileReader.getProperty("url"))
         logger.info("Opening " + configFileReader.getProperty("url"))
         iTestContext.setAttribute("driver", driver)

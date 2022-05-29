@@ -8,46 +8,32 @@ import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.slf4j.LoggerFactory
-import java.util.concurrent.TimeUnit
+import java.time.Duration
 
 object SeleniumUtils {
 
     private val logger = LoggerFactory.getLogger(SeleniumUtils::class.java)
 
     fun waitVisibilityOfElement(driver: WebDriver, element: WebElement, timeOutInSeconds: Long) {
-        WebDriverWait(driver, timeOutInSeconds)
+        WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds))
             .until(ExpectedConditions.visibilityOf(element))
     }
 
     fun waitElementToBeClickable(driver: WebDriver, element: WebElement, timeOutInSeconds: Long) {
         val configFileReader = ConfigFileReader()
         try {
-            Thread.sleep(1000)
-            driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS) //nullify implicitlyWait()
-            WebDriverWait(driver, timeOutInSeconds)
+            WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds))
                 .until(ExpectedConditions.elementToBeClickable(element))
         } catch (e: Exception) {
             logger.error("Wait element exception", e)
-        } finally {
-            driver.manage().timeouts().implicitlyWait(
-                configFileReader.getProperty("defaultImplicitlyWait").toLong(),
-                TimeUnit.SECONDS
-            ) //reset implicitlyWait
         }
     }
 
     fun waitForElementPresent(driver: WebDriver, by: By, timeOutInSeconds: Long): WebElement? {
         val element: WebElement
-        val configFileReader = ConfigFileReader()
         try {
-            driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS) //nullify implicitlyWait()
-            Thread.sleep(1000)
-            val wait = WebDriverWait(driver, timeOutInSeconds)
+            val wait = WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds))
             element = wait.until(ExpectedConditions.presenceOfElementLocated(by))
-            driver.manage().timeouts().implicitlyWait(
-                configFileReader.getProperty("defaultImplicitlyWait").toLong(),
-                TimeUnit.SECONDS
-            ) //reset implicitlyWait
             return element
         } catch (e: Exception) {
             logger.error("Wait element exception", e)

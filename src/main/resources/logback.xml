@@ -14,10 +14,10 @@
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>team-city-tests.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>target/team-city-tests.%d{yyyy-MM-dd}.log</fileNamePattern>
 
             <!-- Store files 10 days-->
-            <maxHistory>10</maxHistory>
+            <maxHistory>1</maxHistory>
 
             <!-- Max size of log -->
             <totalSizeCap>10GB</totalSizeCap>
@@ -29,7 +29,7 @@
         <append>false</append>
     </appender>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>

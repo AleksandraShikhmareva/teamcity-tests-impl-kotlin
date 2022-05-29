@@ -20,8 +20,8 @@ object SeleniumUtils {
     }
 
     fun waitElementToBeClickable(driver: WebDriver, element: WebElement, timeOutInSeconds: Long) {
-        val configFileReader = ConfigFileReader()
         try {
+            Thread.sleep(500)
             WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds))
                 .until(ExpectedConditions.elementToBeClickable(element))
         } catch (e: Exception) {
@@ -32,6 +32,7 @@ object SeleniumUtils {
     fun waitForElementPresent(driver: WebDriver, by: By, timeOutInSeconds: Long): WebElement? {
         val element: WebElement
         try {
+            Thread.sleep(500)
             val wait = WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds))
             element = wait.until(ExpectedConditions.presenceOfElementLocated(by))
             return element
